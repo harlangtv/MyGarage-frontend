@@ -1,25 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import CarsPage from "./containers/CarsPage";
+
 
 class App extends Component {
+  state={
+    cars: [],
+    carImages: []
+  }
+
+
+  componentDidMount = () => {
+    Promise.all([
+           fetch('http://localhost:3000/api/v1/listings'),
+           fetch('http://localhost:3000/api/v1/images')
+       ])
+       .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+       .then(([data1, data2]) => this.setState({
+           cars: data1,
+           carImages: data2
+       }))
+  }
+
   render() {
+    console.log(this.state.cars)
+    console.log(this.state.carImages)
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <CarsPage
+          cars={this.state.cars}
+          carImages={this.state.carImages}/>
       </div>
     );
   }

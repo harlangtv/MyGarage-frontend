@@ -8,7 +8,6 @@ class App extends Component {
     carImages: []
   }
 
-
   componentDidMount = () => {
     Promise.all([
            fetch('http://localhost:3000/api/v1/listings'),
@@ -28,7 +27,8 @@ class App extends Component {
       <div className="App">
         <CarsPage
           cars={this.state.cars}
-          carImages={this.state.carImages}/>
+          carImages={this.state.carImages}
+          />
       </div>
     );
   }

@@ -1,14 +1,13 @@
 import React from "react"
 
-class CarDetails extends React.Component {
-  // debugger
-  render() {
-    return (
-      <div>
-
+const CarDetails = (props) => {
+  console.log("being clicked", props);
+  return (
+      <div >
+        <p> details </p>
       </div>
     )
-  }
+
 }
 
 export default CarDetails

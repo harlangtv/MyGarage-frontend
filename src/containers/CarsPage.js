@@ -1,9 +1,8 @@
 import React from "react";
 import CarCard from '../components/CarCard'
-import CarDetails from '../components/CarDetails'
-
 
 class CarsPage extends React.Component {
+
 
   renderCars = () => {
     return this.props.cars.map(car => {
@@ -15,12 +14,12 @@ class CarsPage extends React.Component {
 
     return (
       <div>
-        {/*this.state.selectedCar ? <></>: */}
         {this.renderCars()}
       </div>
     )
   }
 }
+
 
 
 export default CarsPage

@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import CarsPage from "./containers/CarsPage";
-import CarCard from "./components/CarCard"
+import CarDetails from "./components/CarDetails"
 
 
 class App extends Component {
   state={
-    cars: [],
+    cars: []
   }
 
   componentDidMount = () => {
-           fetch('http://localhost:3000/api/v1/listings')
-       .then(res => res.json())
-       .then(data =>
-        this.setState({
-           cars: data
-       }))
+    fetch('http://localhost:3000/api/v1/listings')
+     .then(res => res.json())
+     .then(data =>
+      this.setState({
+         cars: data
+     }))
   }
 
   render() {

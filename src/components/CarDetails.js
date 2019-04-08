@@ -7,6 +7,7 @@ const CarDetails = (props) => {
         <p> Year: {props.year} </p>
         <p> Transmission: {props.transmission} </p>
         <p> {props.description} </p>
+        <img src={props.image} />
       </div>
     )
 

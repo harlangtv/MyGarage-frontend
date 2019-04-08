@@ -12,9 +12,9 @@ class CarCard extends React.Component {
     })
   }
 
-  // debugger
   render() {
-    // console.log(this.props);
+    console.log(this.props.car.images);
+      // debugger
     return (
       <div>
         <h1>{this.props.car.vehicle_make}</h1>
@@ -26,6 +26,7 @@ class CarCard extends React.Component {
           year={this.props.car.vehicle_year}
           transmission={this.props.car.transmission}
           description={this.props.car.vehicle_description}
+          image={this.props.car.images[0].image_url}
           /> : null}
       </div>
     )

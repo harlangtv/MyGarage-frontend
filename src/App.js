@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CarsPage from "./containers/CarsPage";
+import Header from "./containers/Header"
 import CarDetails from "./components/CarDetails"
 
 
@@ -20,6 +21,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Header />
         <CarsPage
           cars={this.state.cars}
           />

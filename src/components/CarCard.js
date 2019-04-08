@@ -1,4 +1,5 @@
 import React from "react"
+import CarDetails from './CarDetails'
 
 class CarCard extends React.Component {
   // debugger

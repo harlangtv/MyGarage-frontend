@@ -1,11 +1,9 @@
 import React from "react";
 import CarCard from '../components/CarCard'
+import CarDetails from '../components/CarDetails'
 
 
 class CarsPage extends React.Component {
-  state = {
-    selectedCar: null
-  }
 
   renderCars = () => {
     return this.props.cars.map(car => {

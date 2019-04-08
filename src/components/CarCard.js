@@ -1,10 +1,13 @@
 import React from "react"
 
-const CarCard = props => {
-
+class CarCard extends React.Component {
+  // debugger
   render() {
     return (
-      <h1> I am here</h1>
+      <div>
+        <h1>{this.props.car.vehicle_make}</h1>
+        <h2>{this.props.car.vehicle_model}</h2>
+      </div>
     )
   }
 }

@@ -1,10 +1,12 @@
 import React from "react"
 
 const CarDetails = (props) => {
-  console.log("being clicked", props);
+
   return (
-      <div >
-        <p> details </p>
+      <div>
+        <p> Year: {props.year} </p>
+        <p> Transmission: {props.transmission} </p>
+        <p> {props.description} </p>
       </div>
     )
 

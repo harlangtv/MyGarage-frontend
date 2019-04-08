@@ -14,6 +14,7 @@ class CarCard extends React.Component {
 
   // debugger
   render() {
+    // console.log(this.props);
     return (
       <div>
         <h1>{this.props.car.vehicle_make}</h1>
@@ -21,7 +22,11 @@ class CarCard extends React.Component {
         <button onClick={this.handleSelectCar} >
           Show {this.props.car.vehicle_model} Details
         </button>
-        {this.state.displayCarDetails ? <CarDetails /> : null}
+        {this.state.displayCarDetails ? <CarDetails
+          year={this.props.car.vehicle_year}
+          transmission={this.props.car.transmission}
+          description={this.props.car.vehicle_description}
+          /> : null}
       </div>
     )
   }

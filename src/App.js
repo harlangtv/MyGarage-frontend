@@ -51,9 +51,9 @@ class App extends Component {
           "image_url": formSubmit.images
         })
       }).then(res => res.json())
-      this.setState({
-        cars: [...this.state.cars, postNewCar]
-      })
+        .then(newCarListing => this.setState({
+        cars: [...this.state.cars, newCarListing]
+      }))
     })
   }
 

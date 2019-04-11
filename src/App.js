@@ -19,37 +19,52 @@ class App extends Component {
      }))
   }
 
-  addCar = () => {
+  addCar = (formSubmit) => {
+    console.log(formSubmit);
     fetch('http://localhost:3000/api/v1/listings', {
       method: "POST",
-      body: JSON.stringify({
-        vehicle_make: " ",
-        vehicle_model: " ",
-        vehicle_year: " ",
-        mileage: " ",
-        vehicle_zip_code: " ",
-        transmission: " ",
-        vehicle_description: " ",
-        image_url: " "
-      }),
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
-      }
+      },
+      body: JSON.stringify({
+        "user_id": 1,
+        "vehicle_make": formSubmit.vehicle_make,
+        "vehicle_model": formSubmit.vehicle_model,
+        "vehicle_year": formSubmit.vehicle_year,
+        "mileage": formSubmit.mileage,
+        "vehicle_zip_code": formSubmit.vehicle_zip_code,
+        "transmission": formSubmit.transmission,
+        "vehicle_description": formSubmit.vehicle_description
+      })
     })
     .then(res => res.json())
     .then(postNewCar => {
+      fetch('http://localhost:3000/api/v1/images', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          "listing_id": postNewCar.id,
+          "image_url": formSubmit.images
+        })
+      }).then(res => res.json())
       this.setState({
         cars: [...this.state.cars, postNewCar]
       })
     })
   }
 
+
   render() {
     return (
       <div className="App">
         <Header />
-        <CarForm addCar={this.addCar}/>
+        <CarForm
+          addCar={this.addCar}
+          />
         <CarsPage
           cars={this.state.cars}
           />

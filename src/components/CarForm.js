@@ -1,6 +1,8 @@
 import React from "react";
-import CarCard from './CarCard'
+import CarsPage from '../containers/CarsPage'
+
 class CarForm extends React.Component {
+
   state = {
     vehicle_make: " ",
     vehicle_model: " ",
@@ -9,23 +11,12 @@ class CarForm extends React.Component {
     vehicle_zip_code: " ",
     transmission: " ",
     vehicle_description: " ",
-    image_url: " "
+    images: " "
   }
 
   handleSubmit = (event) => {
-    event.preventDefault()
-    this.props.addCar(this.state.vehicle_make, this.state.vehicle_model, this.state.vehicle_year, this.state.mileage, this.state.vehicle_zip_code, this.state.transmission, this.state.vehicle_description, this.state.image_url)
-
-    this.setState({
-      vehicle_make: " ",
-      vehicle_model: " ",
-      vehicle_year: " ",
-      mileage: " ",
-      vehicle_zip_code: " ",
-      transmission: " ",
-      vehicle_description: " ",
-      image_url: " "
-    })
+    event.preventDefault();
+    this.props.addCar(this.state)
   }
 
   handleChange = (event) => {
@@ -88,20 +79,20 @@ class CarForm extends React.Component {
               value={this.state.vehicle_description}
               onChange={this.handleChange} />
           </label>
-          <label> Vehicle Make:
+          <label> Vehicle Image (URL):
             <input
               type="text"
-              name="image_url"
-              value={this.state.image_url}
+              name="images"
+              value={this.state.images}
               onChange={this.handleChange} />
           </label>
-          <input type="submit" value="Create New Listing" />
+          <button onClick={this.handleSubmit}> Create New Listing </button>
         </form>
       </div>
     )
   }
 }
 
-
-
 export default CarForm
+
+// this.state.vehicle_make, this.state.vehicle_model, this.state.vehicle_year, this.state.mileage, this.state.vehicle_zip_code, this.state.transmission, this.state.vehicle_description, this.state.image_url

@@ -13,7 +13,7 @@ class CarCard extends React.Component {
   }
 
   render() {
-      // debugger
+    console.log(this.props.car);
     return (
       <div>
         <h2>{this.props.car.vehicle_make}</h2>

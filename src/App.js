@@ -14,8 +14,12 @@ class App extends Component {
 // take get fetch out of componentDidMount (call function getCars)
 // then call function in componentDidMount
 // pass fuction down to cars page
-// and run function in the edit form 
+// and run function in the edit form
   componentDidMount = () => {
+    this.getCars(this.state.cars)
+  }
+
+  getCars = () => {
     fetch('http://localhost:3000/api/v1/listings')
      .then(res => res.json())
      .then(data =>
@@ -73,6 +77,7 @@ class App extends Component {
           />
         <CarsPage
           cars={this.state.cars}
+          getCars={this.getCars}
           />
 
       </div>

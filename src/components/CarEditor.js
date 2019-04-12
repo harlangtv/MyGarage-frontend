@@ -11,6 +11,12 @@ class CarEditor extends Component {
     description: this.props.description,
   }
 
+  handleEditChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
   // handleEdit = (event) => {
   //   fetch(`http://localhost:3000/api/v1/listings/{this.props.id}`, {
   //     method: 'PATCH',
@@ -30,16 +36,52 @@ class CarEditor extends Component {
   //   }).then(res => res.json()).then(editedCar)
   // }
   render() {
-    // console.log(this.props.id)
+    console.log(this.props.id)
     return (
     <div className="editForm">
       <h4> Edit your listing</h4>
         <form>
-          <label> Vehicle Make
+          <label> Vehicle Make:
             <input
               type="text"
               name="make"
-              value={this.state.make} />
+              value={this.state.make}
+              onChange={this.handleEditChange}/>
+          </label>
+          <label> Vehicle Model:
+            <input
+              type="text"
+              name="model"
+              value={this.state.model}
+              onChange={this.handleEditChange}/>
+          </label>
+          <label> Vehicle Year:
+            <input
+              type="number"
+              name="year"
+              value={this.state.year}
+              onChange={this.handleEditChange}/>
+          </label>
+          <label> Mileage:
+            <input
+              type="number"
+              name="mileage"
+              value={this.state.mileage}
+              onChange={this.handleEditChange}/>
+          </label>
+          <label> Vehicle Zip Code:
+            <input
+              type="number"
+              name="zipCode"
+              value={this.state.zipCode}
+              onChange={this.handleEditChange}/>
+          </label>
+          <label> Description:
+            <textarea
+              rows="4" cols="50"
+              name="description"
+              value={this.state.description}
+              onChange={this.handleEditChange}/>
           </label>
         </form>
 

@@ -49,21 +49,24 @@ class CarForm extends React.Component {
               type="number"
               name="vehicle_year"
               value={this.state.vehicle_year}
-              onChange={this.handleChange} />
+              onChange={this.handleChange}
+              maxLength="4"/>
           </label>
           <label> Mileage:
             <input
               type="number"
               name="mileage"
               value={this.state.mileage}
-              onChange={this.handleChange} />
+              onChange={this.handleChange}
+              maxLength="6" />
           </label>
           <label> Vehicle Zip Code:
             <input
               type="number"
               name="vehicle_zip_code"
               value={this.state.vehicle_zip_code}
-              onChange={this.handleChange} />
+              onChange={this.handleChange}
+              maxLength="5"/>
           </label>
           <label> Transmission:
             <input

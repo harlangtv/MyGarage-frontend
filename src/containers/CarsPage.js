@@ -10,7 +10,7 @@ class CarsPage extends React.Component {
   }
 
   render() {
-
+    console.log(this.props.getCars);
     return (
       <div>
         {this.renderCars()}

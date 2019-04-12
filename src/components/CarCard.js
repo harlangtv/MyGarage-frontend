@@ -15,7 +15,6 @@ class CarCard extends React.Component {
   }
 
   handleEditClick = () => {
-    console.log("clicking edit")
     this.setState({
       displayEditForm: !this.state.displayEditForm
     })

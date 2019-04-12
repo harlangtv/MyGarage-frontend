@@ -17,30 +17,37 @@ class CarEditor extends Component {
     })
   }
 
-  // handleEdit = (event) => {
-  //   fetch(`http://localhost:3000/api/v1/listings/{this.props.id}`, {
-  //     method: 'PATCH',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json'
-  //     }
-  //     body: JSON.stringify({
-  //       make: this.state.make,
-  //       model: this.state.model,
-  //       year: this.state.year,
-  //       mileage: this.state.mileage,
-  //       zipCode: this.state.zipCode,
-  //       transmission: this.state.zipCode,
-  //       description: this.state.description
-  //     })
-  //   }).then(res => res.json()).then(editedCar)
-  // }
+  handleEditSubmit = (event) => {
+    event.preventDefault()
+    console.log("in fetch", this.state);
+    fetch(`http://localhost:3000/api/v1/listings/${this.props.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        vehicle_make: this.state.make,
+        vehicle_model: this.state.model,
+        vehicle_year: this.state.year,
+        mileage: this.state.mileage,
+        vehicle_zip_code: this.state.zipCode,
+        transmission: this.state.zipCode,
+        vehicle_description: this.state.description
+      })
+    }).then(res => res.json())
+      .then(editedCar => {
+        console.log("in .then", editedCar);
+        this.props.reRenderCars(editedCar)}
+      )
+  }
+
   render() {
-    console.log(this.props.id)
+    console.log("in render", this.props)
     return (
     <div className="editForm">
       <h4> Edit your listing</h4>
-        <form>
+        <form onSubmit={this.handleEditSubmit}>
           <label> Vehicle Make:
             <input
               type="text"
@@ -83,6 +90,7 @@ class CarEditor extends Component {
               value={this.state.description}
               onChange={this.handleEditChange}/>
           </label>
+          <button onClick={this.handleEditSubmit}> Submit updated Car</button>
         </form>
 
     </div>

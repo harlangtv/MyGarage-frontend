@@ -65,7 +65,16 @@ class App extends Component {
     })
   }
 
-
+  reRenderCars = (editedCar) => {
+    let oldCar = this.state.cars.find(car => car.id === editedCar.id)
+    let oldCarIndex = this.state.cars.indexOf(oldCar)
+    let carsArray = this.state.cars
+    debugger
+    carsArray.splice(oldCarIndex, 1, editedCar)
+    this.setState({
+      cars: carsArray
+    })
+  }
 
 
   render() {
@@ -77,7 +86,7 @@ class App extends Component {
           />
         <CarsPage
           cars={this.state.cars}
-          getCars={this.getCars}
+          reRenderCars={this.reRenderCars}
           />
 
       </div>

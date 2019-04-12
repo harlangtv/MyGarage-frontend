@@ -23,7 +23,7 @@ class CarCard extends React.Component {
       // debugger
     return (
       <div>
-        <h2>{this.props.car.vehicle_make}</h2>
+        <h2>{this.props.car.vehicle_year} {this.props.car.vehicle_make}</h2>
         <h3>{this.props.car.vehicle_model}</h3>
         <button onClick={this.handleSelectCar} >
           Show {this.props.car.vehicle_model} Details
@@ -47,6 +47,7 @@ class CarCard extends React.Component {
           description={this.props.car.vehicle_description}
           image={this.props.car.images[0].image_url}
           id={this.props.car.id}
+          reRenderCars={this.props.reRenderCars}
           /> : null}
 
       </div>

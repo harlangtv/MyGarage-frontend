@@ -4,7 +4,6 @@ const CarDetails = (props) => {
 
   return (
       <div>
-        <p> Year: {props.year} </p>
         <p> Transmission: {props.transmission} </p>
         <p> Mileage: {props.mileage} </p>
         <p> {props.description} </p>

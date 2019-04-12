@@ -19,6 +19,10 @@ class CarCard extends React.Component {
       displayEditForm: !this.state.displayEditForm
     })
   }
+
+  handleDeleteClick = () => {
+    
+  }
   render() {
       // debugger
     return (

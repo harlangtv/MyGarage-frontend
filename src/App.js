@@ -5,11 +5,16 @@ import CarDetails from "./components/CarDetails"
 import CarForm from "./components/CarForm"
 
 
+
 class App extends Component {
   state={
     cars: []
   }
 
+// take get fetch out of componentDidMount (call function getCars)
+// then call function in componentDidMount
+// pass fuction down to cars page
+// and run function in the edit form 
   componentDidMount = () => {
     fetch('http://localhost:3000/api/v1/listings')
      .then(res => res.json())
@@ -20,7 +25,6 @@ class App extends Component {
   }
 
   addCar = (formSubmit) => {
-    console.log(formSubmit);
     fetch('http://localhost:3000/api/v1/listings', {
       method: "POST",
       headers: {
@@ -58,6 +62,8 @@ class App extends Component {
   }
 
 
+
+
   render() {
     return (
       <div className="App">
@@ -68,6 +74,7 @@ class App extends Component {
         <CarsPage
           cars={this.state.cars}
           />
+
       </div>
     );
   }

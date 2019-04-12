@@ -1,6 +1,5 @@
 import React from "react";
 import CarCard from '../components/CarCard'
-import CarForm from '../components/CarForm'
 class CarsPage extends React.Component {
 
 

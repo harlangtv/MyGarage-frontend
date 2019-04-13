@@ -1,24 +1,62 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom'
 import CarsPage from "./containers/CarsPage";
 import Header from "./containers/Header"
 import CarDetails from "./components/CarDetails"
 import CarForm from "./components/CarForm"
-
+import LoginForm from "./components/LoginForm"
+import SignUpForm from "./components/SignUpForm"
 
 
 class App extends Component {
   state={
-    cars: []
+    cars: [],
+    users: [],
+    currentUser: null
   }
 
-// take get fetch out of componentDidMount (call function getCars)
-// then call function in componentDidMount
-// pass fuction down to cars page
-// and run function in the edit form
   componentDidMount = () => {
-    this.getCars(this.state.cars)
+    this.getCars()
+    this.getUsers()
+    this.updateLocalStorage()
   }
 
+  updateLocalStorage = () => {
+    const jwt = localStorage.getItem('jwt')
+    if (jwt) {
+      fetch("http://localhost:3001/api/v1/auto_login", {
+        headers: {
+          "Authorization": jwt
+        }
+      })
+      .then(res => res.json())
+      .then((response) => {
+        if(response.errors) {
+          alert(response.errors)
+        } else {
+          this.setState({currentUser: response})
+        }
+      })
+    }
+  }
+
+  setCurrentUser = (response) => {
+    this.setState({
+      currentUser: response
+    })
+  }
+
+  updateUser = (user) => {
+    this.setState({
+      currentUser: user
+    })
+  }
+
+  logout = () => {
+    this.setState({
+      currentUser: null
+    }, () => {this.prpos.history.push("/login") })
+  }
   getCars = () => {
     fetch('http://localhost:3000/api/v1/listings')
      .then(res => res.json())
@@ -28,6 +66,15 @@ class App extends Component {
      }))
   }
 
+  getUsers = () => {
+    fetch('http://localhost:3000/api/v1/users')
+    .then(res => res.json())
+    .then(users =>
+      this.setState({
+        users: users
+      })
+    )
+  }
   addCar = (formSubmit) => {
     fetch('http://localhost:3000/api/v1/listings', {
       method: "POST",
@@ -69,7 +116,6 @@ class App extends Component {
     let oldCar = this.state.cars.find(car => car.id === editedCar.id)
     let oldCarIndex = this.state.cars.indexOf(oldCar)
     let carsArray = this.state.cars
-    debugger
     carsArray.splice(oldCarIndex, 1, editedCar)
     this.setState({
       cars: carsArray
@@ -78,18 +124,30 @@ class App extends Component {
 
 
   render() {
+    console.log(this.state.currentUser);
     return (
-      <div className="App">
-        <Header />
-        <CarForm
-          addCar={this.addCar}
-          />
-        <CarsPage
-          cars={this.state.cars}
-          reRenderCars={this.reRenderCars}
-          />
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route path="/carform" render={routerProps => <CarForm addCar={this.addCar} {...routerProps} />} />
+            <Route path="/login" render={routerProps => <LoginForm {...routerProps} setCurrentUser={this.setCurrentUser}/>} />
+  
+            <Route path="/cars" render={routerProps => <CarsPage {...routerProps} cars={this.state.cars} reRenderCars={this.reRenderCars}/>} />
+              </Switch>
 
-      </div>
+          <Header />
+          <LoginForm />
+          <SignUpForm />
+          <CarForm
+            addCar={this.addCar}
+            />
+          <CarsPage
+            cars={this.state.cars}
+            reRenderCars={this.reRenderCars}
+            />
+
+        </div>
+      </Router>
     );
   }
 }

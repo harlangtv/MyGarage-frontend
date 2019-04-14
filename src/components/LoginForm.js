@@ -1,5 +1,5 @@
 import React from "react"
-
+import { Form, Button } from 'semantic-ui-react'
 class LoginForm extends React.Component {
 
   state = {
@@ -34,38 +34,39 @@ class LoginForm extends React.Component {
       } else {
         this.props.setCurrentUser(response.user)
 				localStorage.setItem('jwt', response.jwt)
-				this.props.history.push(`/users/${response.user.id}`)
+				this.props.history.push(`/cars`)
       }
     })
   }
 
   render() {
     return (
-      <div className="Login">
-        Login Form
-        <form onSubmit={this.handleLoginSubmit}>
-            <label> Username:
+        <Form onSubmit={this.handleLoginSubmit}>
+          <Form.Field>
+            <label> Username: </label>
               <input
                 type="text"
                 name="username"
+                placeholder="username"
                 value={this.state.username}
                 onChange={this.handleChange} />
-            </label>
-            <label> Password:
+            </Form.Field>
+            <Form.Field>
+            <label> Password: </label>
               <input
                 type="password"
                 name="password"
+                placeholder="password"
                 value={this.state.password}
                 onChange={this.handleChange} />
-            </label>
-            <button
+            </Form.Field>
+            <Button
               type="submit"
               disabled={!this.validateForm}
               >
               Login
-            </button>
-          </form>
-      </div>
+            </Button>
+          </Form>
     )
   }
 }

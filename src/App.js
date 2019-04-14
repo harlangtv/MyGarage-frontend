@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { NavLink, Route, Switch } from 'react-router-dom'
+import { Grid } from 'semantic-ui-react'
 import CarsPage from "./containers/CarsPage";
 import Header from "./containers/Header"
 import CarDetails from "./components/CarDetails"
@@ -61,7 +62,7 @@ class App extends Component {
   logout = () => {
     this.setState({
       currentUser: null
-    }, () => {this.prpos.history.push("/login") })
+    }, () => {this.props.history.push("/cars") })
   }
   getCars = () => {
     fetch('http://localhost:3000/api/v1/listings')
@@ -152,30 +153,21 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Header />
+      <Grid>
+        <Header
+          history={this.props.history} currentUser={this.state.currentUser}
+          logout={this.logout}
+          />
+        <Grid.Row centered>
           <Switch>
+            <Route path="/" component={LoginForm} />
             <Route path="/carform" render={routerProps => <CarForm addCar={this.addCar} {...routerProps} />} />
             <Route path="/login" render={routerProps => <LoginForm {...routerProps} setCurrentUser={this.setCurrentUser}/>} />
-            <Route path="/cars" render={routerProps => <CarsPage {...routerProps} cars={this.state.cars} reRenderCars={this.reRenderCars}/>} />
+            <Route path="/cars" render={routerProps => <CarsPage {...routerProps} cars={this.state.cars} reRenderCars={this.reRenderCars} handleDelete={this.handleDelete}/>} />
             <Route path="/signup" component={SignUpForm} />
-              </Switch>
-
-
-        <LoginForm
-          setCurrentUser={this.setCurrentUser}
-          />
-        <SignUpForm />
-        <CarForm
-          addCar={this.addCar}
-          />
-        <CarsPage
-          cars={this.state.cars}
-          reRenderCars={this.reRenderCars}
-          handleDelete={this.handleDelete}
-          />
-
-      </div>
+          </Switch>
+        </Grid.Row>
+      </Grid>
     );
   }
 }
@@ -191,3 +183,16 @@ export default App;
 //     cars: carsArray
 //   })
 // }
+
+// <LoginForm
+//   setCurrentUser={this.setCurrentUser}
+//   />
+// <SignUpForm />
+// <CarForm
+//   addCar={this.addCar}
+//   />
+// <CarsPage
+//   cars={this.state.cars}
+//   reRenderCars={this.reRenderCars}
+//   handleDelete={this.handleDelete}
+//   />

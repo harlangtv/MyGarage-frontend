@@ -5,7 +5,8 @@ import CarEditor from './CarEditor'
 class CarCard extends React.Component {
   state = {
     displayCarDetails: false,
-    displayEditForm: false
+    displayEditForm: false,
+    displayDeleteOption: false
   }
 
   handleSelectCar = () => {
@@ -20,9 +21,12 @@ class CarCard extends React.Component {
     })
   }
 
-  handleDeleteClick = () => {
-    
-  }
+  // handleDeleteOption = () => {
+  //   this.setState({
+  //     displayDeleteOption: !this.state.displayDeleteOption
+  //   })
+  // }
+
   render() {
       // debugger
     return (
@@ -32,8 +36,7 @@ class CarCard extends React.Component {
         <button onClick={this.handleSelectCar} >
           Show {this.props.car.vehicle_model} Details
         </button>
-        <button onClick={this.handleEditClick} > Update/Edit Listing</button>
-        <button> Delete Listing</button>
+        <button onClick={this.handleEditClick} > Update/Delete Listing</button>
         {this.state.displayCarDetails ? <CarDetails
           year={this.props.car.vehicle_year}
           transmission={this.props.car.transmission}
@@ -52,6 +55,8 @@ class CarCard extends React.Component {
           image={this.props.car.images[0].image_url}
           id={this.props.car.id}
           reRenderCars={this.props.reRenderCars}
+          handleDelete={this.props.handleDelete}
+          car={this.props.cart}
           /> : null}
 
       </div>

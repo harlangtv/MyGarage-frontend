@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom'
+import { NavLink, Route, Switch } from 'react-router-dom'
 import CarsPage from "./containers/CarsPage";
 import Header from "./containers/Header"
 import CarDetails from "./components/CarDetails"
@@ -9,11 +9,17 @@ import SignUpForm from "./components/SignUpForm"
 
 
 class App extends Component {
-  state={
-    cars: [],
-    users: [],
-    currentUser: null
+  constructor(){
+    super()
+    this.state={
+      cars: [],
+      users: [],
+      currentUser: null
+    }
+    this.handleDelete = this.handleDelete.bind(this)
+    this.deleteCar = this.deleteCar.bind(this)
   }
+
 
   componentDidMount = () => {
     this.getCars()
@@ -24,7 +30,7 @@ class App extends Component {
   updateLocalStorage = () => {
     const jwt = localStorage.getItem('jwt')
     if (jwt) {
-      fetch("http://localhost:3001/api/v1/auto_login", {
+      fetch("http://localhost:3000/api/v1/auto_login", {
         headers: {
           "Authorization": jwt
         }
@@ -122,34 +128,66 @@ class App extends Component {
     })
   }
 
+  handleDelete = (id) => {
+    fetch(`http://localhost:3000/api/v1/listings/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(res => {
+      console.log("in handleDelete", id)
+      this.deleteCar(id)
+    })
+  }
+
+
+  deleteCar = (id) => {
+    let newCars = this.state.cars.filter(car => car.id !== id)
+    this.setState({
+      cars: newCars
+    })
+  }
+
+
 
   render() {
-    console.log(this.state.currentUser);
     return (
-      <Router>
-        <div className="App">
+      <div className="App">
+        <Header />
           <Switch>
             <Route path="/carform" render={routerProps => <CarForm addCar={this.addCar} {...routerProps} />} />
             <Route path="/login" render={routerProps => <LoginForm {...routerProps} setCurrentUser={this.setCurrentUser}/>} />
-  
             <Route path="/cars" render={routerProps => <CarsPage {...routerProps} cars={this.state.cars} reRenderCars={this.reRenderCars}/>} />
+            <Route path="/signup" component={SignUpForm} />
               </Switch>
 
-          <Header />
-          <LoginForm />
-          <SignUpForm />
-          <CarForm
-            addCar={this.addCar}
-            />
-          <CarsPage
-            cars={this.state.cars}
-            reRenderCars={this.reRenderCars}
-            />
 
-        </div>
-      </Router>
+        <LoginForm
+          setCurrentUser={this.setCurrentUser}
+          />
+        <SignUpForm />
+        <CarForm
+          addCar={this.addCar}
+          />
+        <CarsPage
+          cars={this.state.cars}
+          reRenderCars={this.reRenderCars}
+          handleDelete={this.handleDelete}
+          />
+
+      </div>
     );
   }
 }
 
 export default App;
+
+// renderAfterDelete = (deletedCar) => {
+//   let removeCar = this.state.cars.find(car => car.id === deletedCar.id)
+//   let removeCarIndex = this.state.cars.indexOf(removeCar)
+//   let carsArray = this.state.cars
+//   carsArray.splice(removeCarIndex, 1)
+//   this.setState({
+//     cars: carsArray
+//   })
+// }

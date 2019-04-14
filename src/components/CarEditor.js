@@ -42,6 +42,8 @@ class CarEditor extends Component {
       )
   }
 
+  
+
   render() {
     console.log("in render", this.props)
     return (
@@ -91,6 +93,7 @@ class CarEditor extends Component {
               onChange={this.handleEditChange}/>
           </label>
           <button onClick={this.handleEditSubmit}> Submit updated Car</button>
+          <button onClick={() => this.props.handleDelete(this.props.id)}> Delete Listing </button>
         </form>
 
     </div>

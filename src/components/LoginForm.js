@@ -34,7 +34,8 @@ class LoginForm extends React.Component {
       } else {
         this.props.setCurrentUser(response.user)
 				localStorage.setItem('jwt', response.jwt)
-				this.props.history.push(`/cars`)
+        console.log(response);
+				this.props.routerProps.history.push(`/cars`)
       }
     })
   }

@@ -118,8 +118,9 @@ class App extends Component {
           "image_url": formSubmit.images
         })
       }).then(res => res.json())
-        .then(newCarListing => this.setState({
-        cars: [...this.state.cars, newCarListing]
+        .then(newCarListing =>
+          this.setState({
+            cars: [...this.state.cars, newCarListing]      
       }))
     })
   }
@@ -165,13 +166,20 @@ class App extends Component {
           />
         <Grid.Row centered>
           <Switch>
-            <Route path="/" render={(props) => <CarsPage
-                routerProps={props} cars={this.state.cars} reRenderCars={this.reRenderCars} handleDelete={this.handleDelete}/>} />
-            <Route path="/carform" render={(props) => <CarForm routerProps={props} addCar={this.addCar} />} />
-            <Route path="/login" render={routerProps => <LoginForm {...routerProps} setCurrentUser={this.setCurrentUser}/>} />
-            <Route path="/cars" render={(props) => <CarsPage
+            <Route
+            path="/carform"
+            render={(props) => <CarForm routerProps={props} addCar={this.addCar} />} />
+            <Route
+            path="/login"
+            render={(props) => <LoginForm routerProps={props} setCurrentUser={this.setCurrentUser}/>} />
+            <Route
+              path="/cars" render={(props) => <CarsPage
                 routerProps={props} cars={this.state.cars} reRenderCars={this.reRenderCars} handleDelete={this.handleDelete}/>} />
             <Route path="/signup" component={SignUpForm} />
+            <Route
+              path="/"
+              render={(props) => <CarsPage
+                routerProps={props} cars={this.state.cars} reRenderCars={this.reRenderCars} handleDelete={this.handleDelete}/>} />
           </Switch>
         </Grid.Row>
       </Grid>

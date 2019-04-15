@@ -20,6 +20,9 @@ class Header extends React.Component {
 									<Menu.Item onClick={()=>this.props.history.push(`/users/${this.props.currentUser.id}`)} >
 
 									</Menu.Item>
+                  <Link className="item" to="/carform">
+                    Add New Listing
+                  </Link>
 									<Link className="item" to="/login" onClick={this.logout} >
 										Logout
 									</Link>

@@ -63,7 +63,9 @@ class App extends Component {
     this.setState({
       currentUser: null
     }, () => {this.props.history.push("/cars") })
+    console.log("logged out")
   }
+
   getCars = () => {
     fetch('http://localhost:3000/api/v1/listings', {
       headers: {
@@ -87,6 +89,7 @@ class App extends Component {
       })
     )
   }
+
   addCar = (formSubmit) => {
     fetch('http://localhost:3000/api/v1/listings', {
       method: "POST",
@@ -120,7 +123,7 @@ class App extends Component {
       }).then(res => res.json())
         .then(newCarListing =>
           this.setState({
-            cars: [...this.state.cars, newCarListing]      
+            cars: [...this.state.cars, newCarListing]
       }))
     })
   }
@@ -153,8 +156,6 @@ class App extends Component {
       cars: newCars
     })
   }
-
-
 
   render() {
     console.log(this.state.cars);

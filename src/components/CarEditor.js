@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Form, Button } from 'semantic-ui-react'
 
 class CarEditor extends Component {
   state = {
@@ -47,56 +48,58 @@ class CarEditor extends Component {
   render() {
     console.log("in render", this.props)
     return (
-    <div className="editForm">
-      <h4> Edit your listing</h4>
-        <form onSubmit={this.handleEditSubmit}>
-          <label> Vehicle Make:
-            <input
-              type="text"
-              name="make"
-              value={this.state.make}
-              onChange={this.handleEditChange}/>
-          </label>
-          <label> Vehicle Model:
+        <Form onSubmit={this.handleEditSubmit}>
+          <Form.Field>
+            <label> Vehicle Make:</label>
+              <input
+                type="text"
+                name="make"
+                value={this.state.make}
+                onChange={this.handleEditChange}/>
+          </Form.Field>
+          <Form.Field>
+          <label> Vehicle Model:</label>
             <input
               type="text"
               name="model"
               value={this.state.model}
               onChange={this.handleEditChange}/>
-          </label>
-          <label> Vehicle Year:
+          </Form.Field>
+          <Form.Field>
+          <label> Vehicle Year: </label>
             <input
               type="number"
               name="year"
               value={this.state.year}
               onChange={this.handleEditChange}/>
-          </label>
-          <label> Mileage:
+          </Form.Field>
+          <Form.Field>
+          <label> Mileage: </label>
             <input
               type="number"
               name="mileage"
               value={this.state.mileage}
               onChange={this.handleEditChange}/>
-          </label>
-          <label> Vehicle Zip Code:
+          </Form.Field>
+          <Form.Field>
+          <label> Vehicle Zip Code: </label>
             <input
               type="number"
               name="zipCode"
               value={this.state.zipCode}
               onChange={this.handleEditChange}/>
-          </label>
-          <label> Description:
+          </Form.Field>
+          <Form.Field>
+          <label> Description:</label>
             <textarea
               rows="4" cols="50"
               name="description"
               value={this.state.description}
               onChange={this.handleEditChange}/>
-          </label>
-          <button onClick={this.handleEditSubmit}> Update Car</button>
-          
-        </form>
+          </Form.Field>
+          <Button onClick={this.handleEditSubmit}> Submit Listing </Button>
 
-    </div>
+        </Form>
     )
   }
 }

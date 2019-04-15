@@ -47,7 +47,7 @@ class CarCard extends React.Component {
                 <Modal.Content >
                   <Image wrapped size='medium' src={this.props.car.images[0].image_url} />
                   <Modal.Description>
-                    <Header>{this.props.car.vehicle_year} {this.props.car.vehicle_make}</Header>
+                    <Header>{this.props.car.vehicle_year} {this.props.car.vehicle_make} {this.props.car.vehicle_model}</Header>
                     <p> Transmission: {this.props.car.transmission} </p>
                     <p> Mileage: {this.props.car.mileage} </p>
                     <p> {this.props.car.vehicle_description} </p>
@@ -58,6 +58,19 @@ class CarCard extends React.Component {
               <Button onClick={this.handleEditClick} basic color='blue'>
                 Edit {this.props.car.vehicle_model} Listing
               </Button>
+              {this.state.displayEditForm ? <CarEditor
+                 make={this.props.car.vehicle_make}
+                 model={this.props.car.vehicle_model}
+                 year={this.props.car.vehicle_year}
+                 mileage={this.props.car.mileage}
+                 zipCode={this.props.car.vehicle_zip_code}
+                 transmission={this.props.car.transmission}
+                 description={this.props.car.vehicle_description}
+                 image={this.props.car.images[0].image_url}
+                 id={this.props.car.id}
+                 reRenderCars={this.props.reRenderCars}
+                 car={this.props.car}
+                 /> : null}
               <Button onClick={() => this.props.handleDelete(this.props.car.id)} basic color='red'>
                 Delete Listing
               </Button>

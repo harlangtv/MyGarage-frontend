@@ -5,6 +5,7 @@ import CarsPage from "./containers/CarsPage";
 import Header from "./containers/Header"
 import CarDetails from "./components/CarDetails"
 import CarForm from "./components/CarForm"
+import CarEditor from "./components/CarEditor"
 import LoginForm from "./components/LoginForm"
 import SignUpForm from "./components/SignUpForm"
 import HomePage from "./components/HomePage"

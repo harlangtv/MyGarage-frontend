@@ -1,24 +1,27 @@
-import React from "react";
+import React from "react"
 import CarCard from '../components/CarCard'
-class CarsPage extends React.Component {
 
+const CarsPage = ({ cars, reRenderCars, handleDelete }) => {
 
-  renderCars = () => {
-    return this.props.cars.map(car => {
-      return <CarCard key={car.id} car={car} reRenderCars={this.props.reRenderCars}
-      handleDelete={this.props.handleDelete}  
+  const renderCars = () => {
+    let allCars = cars.map(car => {
+      return <CarCard
+        key={car.id}
+        car={car}
+        reRenderCars={reRenderCars}
+        handleDelete={handleDelete}
         />
     })
+    return allCars
   }
 
-  render() {
     // console.log(this.props.getCars);
     return (
       <div>
-        {this.renderCars()}
+        {renderCars()}
       </div>
+
     )
-  }
 }
 
 

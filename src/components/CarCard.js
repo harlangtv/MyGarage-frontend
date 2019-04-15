@@ -36,7 +36,8 @@ class CarCard extends React.Component {
         <button onClick={this.handleSelectCar} >
           Show {this.props.car.vehicle_model} Details
         </button>
-        <button onClick={this.handleEditClick} > Update/Delete Listing</button>
+        <button onClick={this.handleEditClick} > Update Listing</button>
+        <button onClick={() => this.props.handleDelete(this.props.car.id)}> Delete Listing </button>
         {this.state.displayCarDetails ? <CarDetails
           year={this.props.car.vehicle_year}
           transmission={this.props.car.transmission}
@@ -55,8 +56,7 @@ class CarCard extends React.Component {
           image={this.props.car.images[0].image_url}
           id={this.props.car.id}
           reRenderCars={this.props.reRenderCars}
-          handleDelete={this.props.handleDelete}
-          car={this.props.cart}
+          car={this.props.car}
           /> : null}
 
       </div>

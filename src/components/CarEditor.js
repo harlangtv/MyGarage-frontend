@@ -37,7 +37,7 @@ class CarEditor extends Component {
       })
     }).then(res => res.json())
       .then(editedCar => {
-        console.log("in .then", editedCar);
+        console.log("in handleedit .then", editedCar);
         this.props.reRenderCars(editedCar)}
       )
   }
@@ -93,7 +93,7 @@ class CarEditor extends Component {
               onChange={this.handleEditChange}/>
           </label>
           <button onClick={this.handleEditSubmit}> Update Car</button>
-          <button onClick={() => this.props.handleDelete(this.props.id)}> Delete Listing </button>
+          
         </form>
 
     </div>

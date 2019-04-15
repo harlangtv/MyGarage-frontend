@@ -7,6 +7,8 @@ import CarDetails from "./components/CarDetails"
 import CarForm from "./components/CarForm"
 import LoginForm from "./components/LoginForm"
 import SignUpForm from "./components/SignUpForm"
+import HomePage from "./components/HomePage"
+
 
 
 class App extends Component {
@@ -14,7 +16,6 @@ class App extends Component {
     super()
     this.state={
       cars: [],
-      users: [],
       currentUser: null
     }
     this.handleDelete = this.handleDelete.bind(this)
@@ -24,7 +25,6 @@ class App extends Component {
 
   componentDidMount = () => {
     this.getCars()
-    this.getUsers()
     this.updateLocalStorage()
   }
 
@@ -65,12 +65,17 @@ class App extends Component {
     }, () => {this.props.history.push("/cars") })
   }
   getCars = () => {
-    fetch('http://localhost:3000/api/v1/listings')
+    fetch('http://localhost:3000/api/v1/listings', {
+      headers: {
+        "Authorization": localStorage.getItem('jwt')
+      }
+    })
      .then(res => res.json())
      .then(data =>
-      this.setState({
-         cars: data
-     }))
+         this.setState({
+          cars: data })
+
+      )
   }
 
   getUsers = () => {
@@ -136,11 +141,10 @@ class App extends Component {
         'Content-Type': 'application/json'
       }
     }).then(res => {
-      console.log("in handleDelete", id)
+      console.log("in handleDelete .then", id)
       this.deleteCar(id)
     })
   }
-
 
   deleteCar = (id) => {
     let newCars = this.state.cars.filter(car => car.id !== id)
@@ -152,6 +156,7 @@ class App extends Component {
 
 
   render() {
+    console.log(this.state.cars);
     return (
       <Grid>
         <Header
@@ -160,10 +165,12 @@ class App extends Component {
           />
         <Grid.Row centered>
           <Switch>
-            <Route path="/" component={LoginForm} />
-            <Route path="/carform" render={routerProps => <CarForm addCar={this.addCar} {...routerProps} />} />
+            <Route path="/" render={(props) => <CarsPage
+                routerProps={props} cars={this.state.cars} reRenderCars={this.reRenderCars} handleDelete={this.handleDelete}/>} />
+            <Route path="/carform" render={(props) => <CarForm routerProps={props} addCar={this.addCar} />} />
             <Route path="/login" render={routerProps => <LoginForm {...routerProps} setCurrentUser={this.setCurrentUser}/>} />
-            <Route path="/cars" render={routerProps => <CarsPage {...routerProps} cars={this.state.cars} reRenderCars={this.reRenderCars} handleDelete={this.handleDelete}/>} />
+            <Route path="/cars" render={(props) => <CarsPage
+                routerProps={props} cars={this.state.cars} reRenderCars={this.reRenderCars} handleDelete={this.handleDelete}/>} />
             <Route path="/signup" component={SignUpForm} />
           </Switch>
         </Grid.Row>

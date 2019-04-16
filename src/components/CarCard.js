@@ -55,9 +55,12 @@ class CarCard extends React.Component {
                 </Modal.Content>
               </Modal>
 
-              <Button onClick={this.handleEditClick} basic color='blue'>
+              <Modal trigger={<Button onClick={this.handleEditClick} basic color='blue'>
                 Edit {this.props.car.vehicle_model} Listing
-              </Button>
+              </Button>} closeIcon>
+              <Modal.Header>Edit Vehicle Details</Modal.Header>
+                <Modal.Content>
+                  <Image wrapped size='medium' src={this.props.car.images[0].image_url} />
               {this.state.displayEditForm ? <CarEditor
                  make={this.props.car.vehicle_make}
                  model={this.props.car.vehicle_model}
@@ -71,6 +74,8 @@ class CarCard extends React.Component {
                  reRenderCars={this.props.reRenderCars}
                  car={this.props.car}
                  /> : null}
+               </Modal.Content>
+               </Modal>
               <Button onClick={() => this.props.handleDelete(this.props.car.id)} basic color='red'>
                 Delete Listing
               </Button>

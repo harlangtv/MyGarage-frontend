@@ -8,7 +8,7 @@ import CarForm from "./components/CarForm"
 import CarEditor from "./components/CarEditor"
 import LoginForm from "./components/LoginForm"
 import SignUpForm from "./components/SignUpForm"
-import HomePage from "./components/HomePage"
+// import HomePage from "./components/HomePage"
 
 
 
@@ -61,9 +61,10 @@ class App extends Component {
   }
 
   logout = () => {
+    localStorage.removeItem('jwt')
     this.setState({
       currentUser: null
-    }, () => {this.props.history.push("/cars") })
+    }, () => {this.props.history.push("/login") })
     console.log("logged out")
   }
 
@@ -158,38 +159,62 @@ class App extends Component {
     })
   }
 
+  renderLoggedIn = () => {
+    if (localStorage.getItem('jwt')){
+      return (
+        <Grid>
+          <Header
+            history={this.props.history} currentUser={this.state.currentUser}
+            logout={this.logout}
+            />
+          <Grid.Row centered>
+            <Switch>
+              <Route
+                path="/carform"
+                render={(props) => <CarForm routerProps={props} addCar={this.addCar} />} />
+              <Route
+                path="/login"
+                render={(props) => <LoginForm routerProps={props} setCurrentUser={this.setCurrentUser}/>} />
+              <Route
+                path="/cars" render={(props) => <CarsPage
+                routerProps={props} cars={this.state.cars} reRenderCars={this.reRenderCars} handleDelete={this.handleDelete}/>} />
+              <Route path="/signup" component={SignUpForm} />
+              <Route
+                path="/"
+                render={(props) => <LoginForm routerProps={props} setCurrentUser={this.setCurrentUser}/>} />
+            </Switch>
+          </Grid.Row>
+        </Grid>
+      )
+    }
+    else {
+      return (
+        <Grid>
+          <Grid.Row centered>
+            <Switch>
+              <Route
+              path="/login"
+              render={(props) => <LoginForm routerProps={props} setCurrentUser={this.setCurrentUser}/>} />
+              <Route path="/signup" component={SignUpForm} />
+              <Route
+                path="/"
+                render={(props) => <LoginForm routerProps={props} setCurrentUser={this.setCurrentUser}/>} />
+            </Switch>
+          </Grid.Row>
+        </Grid>
+      )
+    }
+  }
+
   render() {
-    console.log(this.state.cars);
     return (
-      <Grid>
-        <Header
-          history={this.props.history} currentUser={this.state.currentUser}
-          logout={this.logout}
-          />
-        <Grid.Row centered>
-          <Switch>
-            <Route
-            path="/carform"
-            render={(props) => <CarForm routerProps={props} addCar={this.addCar} />} />
-            <Route
-            path="/login"
-            render={(props) => <LoginForm routerProps={props} setCurrentUser={this.setCurrentUser}/>} />
-            <Route
-              path="/cars" render={(props) => <CarsPage
-                routerProps={props} cars={this.state.cars} reRenderCars={this.reRenderCars} handleDelete={this.handleDelete}/>} />
-            <Route path="/signup" component={SignUpForm} />
-            <Route
-              path="/"
-              render={(props) => <CarsPage
-                routerProps={props} cars={this.state.cars} reRenderCars={this.reRenderCars} handleDelete={this.handleDelete}/>} />
-          </Switch>
-        </Grid.Row>
-      </Grid>
-    );
+      <div>
+        {this.renderLoggedIn()}
+      </div>
+    )
   }
 }
-
-export default App;
+export default App
 
 // renderAfterDelete = (deletedCar) => {
 //   let removeCar = this.state.cars.find(car => car.id === deletedCar.id)
@@ -213,3 +238,5 @@ export default App;
 //   reRenderCars={this.reRenderCars}
 //   handleDelete={this.handleDelete}
 //   />
+
+            // <Route path="/home" component={HomePage} />

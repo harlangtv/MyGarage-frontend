@@ -1,4 +1,6 @@
 import React from "react"
+import "../App.css"
+import { Card } from 'semantic-ui-react'
 import CarCard from '../components/CarCard'
 
 const CarsPage = ({ cars, reRenderCars, handleDelete }) => {
@@ -17,8 +19,10 @@ const CarsPage = ({ cars, reRenderCars, handleDelete }) => {
 
     // console.log(this.props.getCars);
     return (
-      <div>
+      <div className="Card-padding">
+        <Card.Group itemsPerRow={3}>
         {renderCars()}
+        </Card.Group>
       </div>
 
     )

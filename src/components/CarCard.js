@@ -1,5 +1,6 @@
 import React from "react"
-import { Button, Card, Image, Modal, Header } from 'semantic-ui-react'
+import { Button, Card, Image, Modal, Header, Grid } from 'semantic-ui-react'
+import '../App.css'
 import CarDetails from './CarDetails'
 import CarEditor from './CarEditor'
 
@@ -31,7 +32,7 @@ class CarCard extends React.Component {
   render() {
       // debugger
     return (
-      <Card.Group>
+
         <Card>
           <Card.Content>
             <Image floated='right' size='large' src={this.props.car.images[0].image_url} />
@@ -82,8 +83,6 @@ class CarCard extends React.Component {
             </div>
           </Card.Content>
         </Card>
-      </Card.Group>
-
     )
   }
 }

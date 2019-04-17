@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Francois+One');
+
 .App {
   text-align: center;
 }
@@ -32,10 +34,24 @@
   }
 }
 
-.Card-padding {
+.ui-Card-padding {
   padding-top: 5px;
   padding-right: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
 
+}
+
+
+.ui-test {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("http://dallascarstorage.com/wp-content/themes/dcs/images/cars2lg.jpg");
+
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.ui-login-style {
+  height: 100%;
 }

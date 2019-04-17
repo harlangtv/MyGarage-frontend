@@ -1,5 +1,6 @@
 import React from "react"
-import { Form, Button } from 'semantic-ui-react'
+import { Form, Button, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import '../App.css'
 class LoginForm extends React.Component {
 
   state = {
@@ -42,10 +43,22 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-        <Form onSubmit={this.handleLoginSubmit}>
+      <div className="ui-test">
+      <div className="ui-login-style" >
+        <div className='ui-login-form'>
+
+        <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
+        <Grid.Column style={{ maxWidth: 450 }}>
+          <Header as='h2' color='white' textAlign='center'>
+            Log-in to your My Garage account
+          </Header>
+          <Segment stacked>
+        <Form size='large' onSubmit={this.handleLoginSubmit}>
           <Form.Field>
             <label> Username: </label>
-              <input
+              <Form.Input
+                fluid icon='user'
+                iconPosition='left'
                 type="text"
                 name="username"
                 placeholder="username"
@@ -54,7 +67,9 @@ class LoginForm extends React.Component {
             </Form.Field>
             <Form.Field>
             <label> Password: </label>
-              <input
+              <Form.Input
+                fluid icon='lock'
+                iconPosition='left'
                 type="password"
                 name="password"
                 placeholder="password"
@@ -62,12 +77,21 @@ class LoginForm extends React.Component {
                 onChange={this.handleChange} />
             </Form.Field>
             <Button
+              color='grey'
+              fluid size='large'
               type="submit"
               disabled={!this.validateForm}
               >
               Login
             </Button>
+
           </Form>
+          </Segment>
+        </Grid.Column>
+        </Grid>
+        </div>
+        </div>
+        </div>
     )
   }
 }

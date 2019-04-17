@@ -162,7 +162,7 @@ class App extends Component {
   renderLoggedIn = () => {
     if (localStorage.getItem('jwt')){
       return (
-        <Grid>
+        <Grid className="main">
           <Header
             history={this.props.history} currentUser={this.state.currentUser}
             logout={this.logout}

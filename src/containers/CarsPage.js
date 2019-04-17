@@ -19,7 +19,7 @@ const CarsPage = ({ cars, reRenderCars, handleDelete }) => {
 
     // console.log(this.props.getCars);
     return (
-      <div className="Card-padding">
+      <div className="ui-card-padding">
         <Card.Group itemsPerRow={3}>
         {renderCars()}
         </Card.Group>

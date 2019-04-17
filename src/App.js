@@ -8,7 +8,7 @@ import CarForm from "./components/CarForm"
 import CarEditor from "./components/CarEditor"
 import LoginForm from "./components/LoginForm"
 import SignUpForm from "./components/SignUpForm"
-// import HomePage from "./components/HomePage"
+
 
 
 
@@ -162,7 +162,7 @@ class App extends Component {
   renderLoggedIn = () => {
     if (localStorage.getItem('jwt')){
       return (
-        <Grid className="main">
+        <Grid>
           <Header
             history={this.props.history} currentUser={this.state.currentUser}
             logout={this.logout}
@@ -215,28 +215,3 @@ class App extends Component {
   }
 }
 export default App
-
-// renderAfterDelete = (deletedCar) => {
-//   let removeCar = this.state.cars.find(car => car.id === deletedCar.id)
-//   let removeCarIndex = this.state.cars.indexOf(removeCar)
-//   let carsArray = this.state.cars
-//   carsArray.splice(removeCarIndex, 1)
-//   this.setState({
-//     cars: carsArray
-//   })
-// }
-
-// <LoginForm
-//   setCurrentUser={this.setCurrentUser}
-//   />
-// <SignUpForm />
-// <CarForm
-//   addCar={this.addCar}
-//   />
-// <CarsPage
-//   cars={this.state.cars}
-//   reRenderCars={this.reRenderCars}
-//   handleDelete={this.handleDelete}
-//   />
-
-            // <Route path="/home" component={HomePage} />

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Francois+One');
+@import url('https://fonts.googleapis.com/css?family=Francois+One|Merriweather:700i')
 
 .App {
   text-align: center;
@@ -34,7 +34,7 @@
   }
 }
 
-.ui-Card-padding {
+.ui-card-padding {
   padding-top: 5px;
   padding-right: 5px;
   padding-bottom: 5px;
@@ -49,9 +49,16 @@
   background-image: url("http://dallascarstorage.com/wp-content/themes/dcs/images/cars2lg.jpg");
 
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
 }
 
 .ui-login-style {
   height: 100%;
+}
+
+#ui-logo {
+  /* margin-left: 100px; */
+  color: #FF533D;
+  font-family: 'Merriweather', serif;;
+  font-size: 30px;
 }

@@ -15,10 +15,12 @@ class Header extends React.Component {
         <Grid.Row>
           <Grid.Column width={16}>
             <Menu size="massive">
-              <Menu.Item name='My Garage' />
               <Menu.Item>
-                <img src='https://static.thenounproject.com/png/743172-200.png' />
+                <img src='https://static.thenounproject.com/png/743172-200.png'
+                  style={{height:'30px'}} style={{width: '45px'}} size='small' name='tree' />
               </Menu.Item>
+              <Menu.Item name='My Garage' />
+
 						{this.props.currentUser
 							?
 								<Menu.Menu position="right">

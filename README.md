@@ -4,6 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## 📌 Features:
 * My Garage is a React Application built for Car Collectors and Enthusiasts as a way to keep track of their vehicles in a simple way online.
 
+![Astrodom-Demo](https://github.com/harlangtv/MyGarage-frontend/blob/master/public/login_page.png?raw=true)
+
 * [Demo link](https://www.youtube.com/watch?v=6_nsGCcEq4Q)
 
 ## 🛠 Built With

@@ -27,10 +27,3 @@ rake db:seed
 Start local server:
 
 rails s
-
-Fork and clone the front end repo:
-
-https://github.com/diaaanek/astrodom_frontend
-
-open index.html
-
